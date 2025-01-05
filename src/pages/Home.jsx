@@ -11,11 +11,9 @@ export default function Home() {
   useEffect(() => {
     const fetchRecentArticles = async () => {
       try {
-        console.log("Works");
         setIsLoading(true);
         const res = await fetch(`/api/post/getPosts?limit=10`);
         const data = await res.json();
-        console.log("Works1");
 
         if (!res.ok) {
           setPostError(data.message);
