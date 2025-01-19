@@ -8,12 +8,14 @@ export default function Home() {
   const [recentArticles, setRecentArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-  getBackendUrl();
+
   useEffect(() => {
     const fetchRecentArticles = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`/api/post/getPosts?limit=10`);
+        const res = await fetch(
+          `${getBackendUrl()}/api/post/getPosts?limit=10`
+        );
         const data = await res.json();
 
         if (!res.ok) {

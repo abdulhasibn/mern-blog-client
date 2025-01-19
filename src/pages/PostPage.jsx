@@ -18,7 +18,9 @@ export default function PostPage() {
     const fetchPost = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`/api/post/getPosts?slug=${postSlug}`);
+        const res = await fetch(
+          `${getBackendUrl()}/api/post/getPosts?slug=${postSlug}`
+        );
         const data = await res.json();
         if (!res.ok) {
           setPostError(data.message);
@@ -40,7 +42,7 @@ export default function PostPage() {
     const fetchRecentArticles = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`/api/post/getPosts?limit=3`);
+        const res = await fetch(`${getBackendUrl()}/api/post/getPosts?limit=3`);
         const data = await res.json();
         if (!res.ok) {
           setPostError(data.message);

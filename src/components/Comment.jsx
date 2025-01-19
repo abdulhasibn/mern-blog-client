@@ -44,12 +44,15 @@ const Comment = ({
 
   const handleDeleteClick = async () => {
     try {
-      const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${getBackendUrl()}/api/comment/deleteComment/${commentId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         console.log("Comment Deleted");
@@ -69,15 +72,18 @@ const Comment = ({
 
   const handleEditOnSave = async (editedComment) => {
     try {
-      const res = await fetch(`/api/comment/editComment/${commentId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content: editedComment,
-        }),
-      });
+      const res = await fetch(
+        `${getBackendUrl()}/api/comment/editComment/${commentId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content: editedComment,
+          }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         console.log("Comment Updated");

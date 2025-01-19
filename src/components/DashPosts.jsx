@@ -13,7 +13,9 @@ export default function DashPosts() {
   const [postIdToDelete, setPostIdToDelete] = useState("");
   const handleDeletePost = async () => {
     const res = await fetch(
-      `api/post/deletePost/${postIdToDelete}/${currentUser._id}`,
+      `${getBackendUrl()}api/post/deletePost/${postIdToDelete}/${
+        currentUser._id
+      }`,
       {
         method: "DELETE",
       }

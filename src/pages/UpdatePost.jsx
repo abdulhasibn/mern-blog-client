@@ -70,7 +70,7 @@ export default function UpdatePost() {
 
     try {
       const res = await fetch(
-        `/api/post/updatePost/${postId}/${currentUser?._id}`,
+        `${getBackendUrl()}/api/post/updatePost/${postId}/${currentUser?._id}`,
         {
           method: "PUT",
           headers: {
@@ -97,7 +97,9 @@ export default function UpdatePost() {
   useEffect(() => {
     try {
       const fetchPost = async () => {
-        const res = await fetch(`/api/post/getPosts?postId=${postId}`);
+        const res = await fetch(
+          `${getBackendUrl()}/api/post/getPosts?postId=${postId}`
+        );
         const data = await res.json();
         if (!res.ok) {
           console.log(data.message);
