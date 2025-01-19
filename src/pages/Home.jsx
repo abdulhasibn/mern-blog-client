@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ArticleCard from "../components/ArticleCard";
-
+import { getBackendUrl } from "../utils/getBackendUrl";
 import CallToActionProject from "../components/CallToActionProject";
 
 export default function Home() {
   const [recentArticles, setRecentArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
+  getBackendUrl();
   useEffect(() => {
     const fetchRecentArticles = async () => {
       try {
