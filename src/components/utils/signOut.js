@@ -6,7 +6,7 @@ export const signOut = async (
 ) => {
   try {
     dispatch(signOutStart());
-    const res = await fetch(`${getBackendUrl()}/api/auth/signout`, {
+    const res = await fetch(`api/auth/signout`, {
       method: "POST",
     });
     const data = await res.json();

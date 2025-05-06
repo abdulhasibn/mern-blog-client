@@ -64,7 +64,7 @@ export default function CreatePost() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${getBackendUrl()}api/post/create`, {
+      const res = await fetch(`api/post/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

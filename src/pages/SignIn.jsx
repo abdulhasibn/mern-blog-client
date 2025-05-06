@@ -28,7 +28,7 @@ export default function SignIn() {
       if (!email || !password) {
         return dispatch(signInFailure("Please fill out all the fields"));
       }
-      const res = await fetch(`${getBackendUrl()}/api/auth/signin`, {
+      const res = await fetch(`api/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
