@@ -5,6 +5,7 @@ import CallToAction from "../components/CallToAction";
 import CommentBox from "../components/CommentBox";
 import { useSelector } from "react-redux";
 import ArticleCard from "../components/ArticleCard";
+import { getBackendUrl } from "../utils/getBackendUrl";
 
 export default function PostPage() {
   const [post, setPost] = useState(null);
@@ -18,7 +19,9 @@ export default function PostPage() {
     const fetchPost = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`api/post/getPosts?slug=${postSlug}`);
+        const res = await fetch(
+          `${getBackendUrl()}api/post/getPosts?slug=${postSlug}`
+        );
         const data = await res.json();
         if (!res.ok) {
           setPostError(data.message);
@@ -40,7 +43,7 @@ export default function PostPage() {
     const fetchRecentArticles = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`api/post/getPosts?limit=3`);
+        const res = await fetch(`${getBackendUrl()}api/post/getPosts?limit=3`);
         const data = await res.json();
         if (!res.ok) {
           setPostError(data.message);

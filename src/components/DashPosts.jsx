@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table, Spinner, Modal, Button, Alert } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { getBackendUrl } from "../utils/getBackendUrl";
 
 export default function DashPosts() {
   const [userPosts, setUserPosts] = useState([]);
@@ -13,7 +14,9 @@ export default function DashPosts() {
   const [postIdToDelete, setPostIdToDelete] = useState("");
   const handleDeletePost = async () => {
     const res = await fetch(
-      `api/post/deletePost/${postIdToDelete}/${currentUser._id}`,
+      `${getBackendUrl()}api/post/deletePost/${postIdToDelete}/${
+        currentUser._id
+      }`,
       {
         method: "DELETE",
       }
@@ -38,7 +41,9 @@ export default function DashPosts() {
       setIsLoading(true);
       const startIndex = userPosts.length;
       const res = await fetch(
-        `api/post/getPosts?userId=${currentUser?._id}&startIndex=${startIndex}`
+        `${getBackendUrl()}api/post/getPosts?userId=${
+          currentUser?._id
+        }&startIndex=${startIndex}`
       );
       const data = await res.json();
       if (res.ok) {
@@ -57,7 +62,9 @@ export default function DashPosts() {
     const getUserPosts = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`api/post/getPosts?userId=${currentUser?._id}`);
+        const res = await fetch(
+          `${getBackendUrl()}api/post/getPosts?userId=${currentUser?._id}`
+        );
         const data = await res.json();
 
         if (res.ok) {

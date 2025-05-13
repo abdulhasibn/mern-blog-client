@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Label, TextInput, Button, Alert, Spinner } from "flowbite-react";
 import OAuth from "../components/OAuth";
 import { useDispatch } from "react-redux";
+import { getBackendUrl } from "../utils/getBackendUrl";
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,7 +23,7 @@ export default function SignUp() {
         setLoading(false);
         return setErrorMessage("All fields are required");
       }
-      const res = await fetch(`api/auth/signup`, {
+      const res = await fetch(`${getBackendUrl()}api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

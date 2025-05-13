@@ -9,8 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     server: {
       proxy: {
-        "/api":
-          mode === "development" ? localENV : import.meta.env.VITE_BACKEND_URL,
+        "/api": localENV,
       },
     },
     plugins: [react()],

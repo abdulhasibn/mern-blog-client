@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Table, Spinner, Modal, Button, Alert } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { getBackendUrl } from "../utils/getBackendUrl";
 
 export default function DashUsers() {
   const [users, setUsers] = useState([]);
@@ -15,9 +16,12 @@ export default function DashUsers() {
   console.log(users);
 
   const handleDeleteUser = async () => {
-    const res = await fetch(`api/user/delete/${userIdToDelete}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `${getBackendUrl()}api/user/delete/${userIdToDelete}`,
+      {
+        method: "DELETE",
+      }
+    );
     const data = await res.json();
 
     if (!res.ok) {
@@ -35,7 +39,9 @@ export default function DashUsers() {
     try {
       setIsLoading(true);
       const startIndex = users.length;
-      const res = await fetch(`api/post/getUsers?startIndex=${startIndex}`);
+      const res = await fetch(
+        `${getBackendUrl()}api/post/getUsers?startIndex=${startIndex}`
+      );
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data?.users]);
@@ -53,7 +59,7 @@ export default function DashUsers() {
     const fetchUsers = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`api/user/getUsers`);
+        const res = await fetch(`${getBackendUrl()}api/user/getUsers`);
         const data = await res.json();
         console.log(data);
         if (res.ok) {

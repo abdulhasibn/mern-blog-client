@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ArticleCard from "../components/ArticleCard";
 import CallToActionProject from "../components/CallToActionProject";
+import { getBackendUrl } from "../utils/getBackendUrl";
 
 export default function Home() {
   const [recentArticles, setRecentArticles] = useState([]);
@@ -12,7 +13,7 @@ export default function Home() {
     const fetchRecentArticles = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`api/post/getPosts?limit=10`);
+        const res = await fetch(`${getBackendUrl()}api/post/getPosts?limit=10`);
         const data = await res.json();
 
         if (!res.ok) {

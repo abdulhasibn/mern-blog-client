@@ -14,6 +14,7 @@ import {
 import { app } from "../firebase";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getBackendUrl } from "../utils/getBackendUrl";
 
 export default function UpdatePost() {
   const [file, setFile] = useState(null);
@@ -97,7 +98,9 @@ export default function UpdatePost() {
   useEffect(() => {
     try {
       const fetchPost = async () => {
-        const res = await fetch(`api/post/getPosts?postId=${postId}`);
+        const res = await fetch(
+          `${getBackendUrl()}api/post/getPosts?postId=${postId}`
+        );
         const data = await res.json();
         if (!res.ok) {
           console.log(data.message);

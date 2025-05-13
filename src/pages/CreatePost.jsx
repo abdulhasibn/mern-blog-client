@@ -12,6 +12,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import { getBackendUrl } from "../utils/getBackendUrl";
 export default function CreatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -64,7 +65,7 @@ export default function CreatePost() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`api/post/create`, {
+      const res = await fetch(`${getBackendUrl()}api/post/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

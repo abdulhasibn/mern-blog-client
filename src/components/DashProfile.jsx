@@ -30,6 +30,7 @@ import {
   signOutSuccess,
 } from "../redux/user/userSlice";
 import { signOut } from "./utils/signOut";
+import { getBackendUrl } from "../utils/getBackendUrl";
 
 export default function DashProfile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -76,9 +77,12 @@ export default function DashProfile() {
   const handleDeleteUser = async () => {
     dispatch(deleteStart());
     try {
-      const res = await fetch(`api/user/delete/${currentUser._id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${getBackendUrl()}api/user/delete/${currentUser._id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await res.json();
       console.log(data);
       if (!res.ok) {
@@ -122,13 +126,16 @@ export default function DashProfile() {
     try {
       dispatch(updateStart());
 
-      const res = await fetch(`api/user/update/${currentUser._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${getBackendUrl()}api/user/update/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
 
       if (!res.ok) {

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Comment from "./Comment";
 import { getAllComments } from "./utils/getAllComments.js";
 import EditComment from "./EditComment.jsx";
+import { getBackendUrl } from "../utils/getBackendUrl.js";
 
 export default function CommentBox({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
@@ -19,7 +20,7 @@ export default function CommentBox({ postId }) {
     if (comment.length > 200) {
       return;
     }
-    const res = await fetch(`api/comment/create`, {
+    const res = await fetch(`${getBackendUrl()}api/comment/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
