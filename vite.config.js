@@ -5,10 +5,12 @@ const localENV = "http://localhost:8000";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  console.log(mode, "modelm");
   return {
     server: {
       proxy: {
-        "/api": mode === "development" ? localENV : process.env.VITE_API_URL,
+        "/api":
+          mode === "development" ? localENV : import.meta.env.VITE_BACKEND_URL,
       },
     },
     plugins: [react()],
