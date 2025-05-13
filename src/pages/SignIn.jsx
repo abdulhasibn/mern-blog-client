@@ -45,7 +45,7 @@ export default function SignIn() {
         navigate("/");
       }
     } catch (error) {
-      dispatch(signInFailure(error));
+      dispatch(signInFailure(error.message));
     }
   }
   return (
@@ -112,7 +112,9 @@ export default function SignIn() {
           </div>
           {errorMessage && (
             <Alert color="red" className="mt-5">
-              {errorMessage}
+              {typeof errorMessage === "string"
+                ? errorMessage
+                : JSON.stringify(errorMessage)}
             </Alert>
           )}
         </div>
